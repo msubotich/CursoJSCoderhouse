@@ -1,0 +1,20 @@
+/*Paleta*/
+$titulos:blue;
+$fondoContainer:lightblue;
+$fondoCards:beige;
+
+.container {
+    background-color: $fondoContainer;
+    .card{
+        background-color: $fondoCards;
+        text-align: center;
+        p{
+            font-size: medium;
+        }
+        h1{
+            font-variant: small-caps;
+            font-weight: lighter;
+            color: $titulos;
+        }
+    }
+}

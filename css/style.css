@@ -1,0 +1,12 @@
+/*Paleta*/
+.container {
+  background-color: lightblue; }
+  .container .card {
+    background-color: beige;
+    text-align: center; }
+    .container .card p {
+      font-size: medium; }
+    .container .card h1 {
+      font-variant: small-caps;
+      font-weight: lighter;
+      color: blue; }
