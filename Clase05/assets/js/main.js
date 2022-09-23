@@ -89,14 +89,18 @@ for (const key in ana) {
 
 class Rectangulo{
     //propiedades
-    constructora(x,y){
+    constructor(x,y){
         this.x = x;
         this.y = y;
     }
 
     //metodos
-    calcularArea(){return this.x * this.y;}
-    calcularPerimetro(){return (this.x + this.y)*2;}
+    calcularArea(){
+        return ` El área es: ${(this.x * this.y)}`;
+    }
+    calcularPerimetro(){
+        return ` El perímetro es: ${(this.x + this.y)*2}`;
+    }
 }
 
 let rect1 = new Rectangulo(2,3);
