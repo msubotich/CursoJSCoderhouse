@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <title>Entregable 1</title>
+</head>
+<body class="container">
+    <h2 class="text-center">Calculadora de precios para piezas impresas 3D</h2>
+    <p class="text-right">Alumno: Martín Subotich</p>
+    <div class="row">
+        <div class="col-xs-12 col-md-2 border border-dark">
+            <p class="text-center">Para esta primera entrega se utilizarán:</p>
+            <ul>
+                <li>Ciclos</li>
+                <li>Condicionales</li>
+                <li>Prompts</li>
+                <li>Alerts</li>
+                <li>Funciones</li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-10 border border-dark">
+            <table id="Tabla1" class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Modelo</th>
+                        <th>Material</th>
+                        <th>Pintura</th>
+                        <th>Tiempo</th>
+                        <th>Ganancia</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="body">
+                    
+                </tbody>
+            </table>
+                
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 2rem">
+        <label for="costoxgramo">Costo por gramo de material $</label>
+        <input id="costoxgramo" type="text"/>
+        <label for="costoxhora">Costo por hora de impresion $</label>
+        <input id="costoxhora" type="text"/>
+        <button type="button" class="btn btn-outline-primary" onclick="agregar()">Agregar Impresion</button>
+    </div>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
+
