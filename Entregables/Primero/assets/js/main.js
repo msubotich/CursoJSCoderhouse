@@ -33,13 +33,22 @@ const agregar = () => {
             }while (isNaN(tiempo));
         
             //cálculo de ganancia y total
-            if (pintura == true){ganancia = 2.5}else{ganancia = 2}	
+            if (pintura == true){
+                ganancia = 2.5
+            }else{
+                ganancia = 2
+            }	
+
             costo = material * costo_g + tiempo * valor_t;
             total = (costo)*ganancia;
 
             //confirmación de datos y carga en tabla
             alert(`El valor final del trabajo es $${total}, con una ganancia de $${total-costo}`);
-            if(pintura){pinturamsg = "si"}else{pinturamsg = "no"};
+            if(pintura){
+                pinturamsg = "si"
+            }else{
+                pinturamsg = "no"
+            };
 
             document.getElementById('Tabla1').insertRow(-1).innerHTML = `
             <td>${cliente}</td><td>${modelo}</td>

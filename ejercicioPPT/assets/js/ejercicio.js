@@ -138,7 +138,7 @@ const juego = () => {
   else if(resultado==0){
       alert("El juego es un empate en " +  puntosMaquina);}
   else
-      alert("Ganas por " + puntosJugador+ " a " + puntosMaquina);
+      alert("Ganas por " + puntosJugador + " a " + puntosMaquina);
 }
 
 
@@ -149,15 +149,15 @@ let opcion = confirm("¿Desea ver el reglamento?");
 let opcion1 = false;
 
   if (opcion == true) {
-      alert("Cada jugador debe elegir una de las opciones ( piedra, papel y tijera ) y compararla con la opción de la otra persona. Para determinar quien gana, se deben seguir las siguientes reglas: Tijera le gana a papel. Papel le gana a piedra. Piedra le gana a tijera. Si ambos jugadores eligen la misma opción es un empate")
+      alert("Cada jugador debe elegir una de las opciones ( 0: piedra, 1: papel y 2: tijera ) y compararla con la opción de la otra persona. Para determinar quien gana, se deben seguir las siguientes reglas: Tijera le gana a papel. Papel le gana a piedra. Piedra le gana a tijera. Si ambos jugadores eligen la misma opción es un empate")
   }
 
 
-do{
-  
-  juego();
+  do{
+    
+    juego();
 
-  opcion1 = confirm("¿Desea jugar nuevamente?");
+    opcion1 = confirm("¿Desea jugar nuevamente?");
 
-}while(opcion1 === true);
+  }while(opcion1 === true);
 }
