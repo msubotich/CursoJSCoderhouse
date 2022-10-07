@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <title>Entregable 2</title>
+</head>
+<body class="container" onload="iniciado()">
+    <h2 class="text-center">Gestión de piezas impresas 3D</h2>
+    <p class="text-right">Alumno: Martín Subotich</p>
+    <div class="row" style="margin-bottom: 1rem">
+        <button type="button" class="btn btn-outline-primary w-25" onclick="agregar()">Agregar Impresion</button>
+        <button type="button" class="btn btn-outline-primary w-25" onclick="eliminar()">Eliminar Impresion</button>
+        <button type="button" class="btn btn-outline-primary w-25" onclick="buscar()">Buscar Impresion</button>
+        <input id="buscareg" class="w-25" type="search" placeholder="Busccar"/>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-2 border border-dark">
+            <p class="text-center">Para esta segunda entrega se utilizarán:</p>
+            <ul>
+                <li>Ciclos</li>
+                <li>Condicionales</li>
+                <li>Prompts</li>
+                <li>Alerts</li>
+                <li>Funciones</li>
+                <li>Objetos</li>
+                <li>Arrays</li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-10 border border-dark" style="overflow: scroll; max-height: 50vh;">
+            <table id="Tabla1" class="table text-center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Modelo</th>
+                        <th>Material</th>
+                        <th>Pintura</th>
+                        <th>Tiempo</th>
+                        <th>Ganancia</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="body">
+                    <!--Contenido de la tabla-->
+                </tbody>
+            </table>
+                
+        </div>
+    </div>
+    <div class="text-center row" style="margin-top: 2rem">
+        <label class="col-xs-12 col-md-2" for="costoxgramo">Costo por gramo $</label>
+        <input class="col-xs-12 col-md-4" id="costoxgramo" type="text"/>
+        <label class="col-xs-12 col-md-2" for="costoxhora">Costo por hora $</label>
+        <input class="col-xs-12 col-md-4" id="costoxhora" type="text"/>
+    </div>
+  
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
+
