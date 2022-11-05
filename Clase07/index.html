@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 7 - Funciones de orden superior</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <a href="../index.html">Volver</a>
+    <p>En esta clase se tratan las funciones de orden superior</p>
+
+    <h4 class="mt-5">Ejercicio Retornar funciones y Recibir funciones por parámetro</h4>
+
+    <hr>
+
+    <p>Uso de funciónes por parametro y retorno</p>
+
+        <form class="formulario">
+
+            <div class="mb-3">
+
+                <label for="num1" class="form-label">Ingrese el primer número:</label>
+
+                <input type="number" class="form-control" id="num1">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="num2" class="form-label"> Ingrese el segundo número:</label>
+
+                <input type="number" class="form-control" id="num2">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="operador" class="form-label">Seleccione una operación</label>
+
+                <select id="operador" class="form-select">
+
+                    <option value="sumar">Sumar</option>
+
+                    <option value="restar">Restar</option>
+
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="calcular">Calcular</button>
+
+        </form>
+
+        <div class="alert alert-warning my-5 maxWidth" role="alert">
+
+            El resultado de <span id="resultado">.</span>
+
+        </div>
+        <script src="./assets/js/main.js"></script>
+</body>
+</html>
