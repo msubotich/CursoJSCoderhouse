@@ -1,7 +1,6 @@
 {
   "entradas" : [
     {
-      "id":1,
       "indice": 1,
       "cliente": "Manuel Fernandez",
       "modelo": "Batman chico",
@@ -10,7 +9,6 @@
       "tiempo": 7
     },
     {
-      "id":2,
       "indice": 2,
       "cliente": "Ana Suarez",
       "modelo": "Busto Skyrim",
@@ -19,7 +17,6 @@
       "tiempo": 9
     },
     {
-      "id":3,
       "indice": 3,
       "cliente": "Pelado",
       "modelo": "kit SW-MF",
@@ -28,7 +25,6 @@
       "tiempo": 1.5
     },
     {
-      "id":4,
       "indice": 4,
       "cliente": "Julian Molteni",
       "modelo": "Mate Groot",
@@ -37,7 +33,6 @@
       "tiempo": 4.1
     },
     {
-      "id":5,
       "indice": 5,
       "cliente": "Lucía (amiga de fer)",
       "modelo": "Miniatura Warhammer",

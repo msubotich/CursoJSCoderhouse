@@ -25,6 +25,7 @@
   "homepage": "https://github.com/msubotich/CursoJSCoderhouse#readme",
   "dependencies": {
     "node-sass": "^7.0.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "sweetalert2": "^11.6.5"
   }
 }
