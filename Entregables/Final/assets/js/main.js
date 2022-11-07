@@ -20,7 +20,7 @@ class Impresion{
         let valor_t = parseFloat(document.getElementById('costoxhora').value);
         let costo_g = parseFloat(document.getElementById('costoxgramo').value);
 
-        this.pintado == true ? ganancia = 2.5: ganancia = 2; // se opta por esta forma por cuestiones de prolijidad.
+        this.pintado == true ? ganancia = 2.5: ganancia = 2;
         costo = this.material * costo_g + this.tiempo * valor_t;
         total = (costo)*ganancia;
         margen = total-costo;
@@ -28,49 +28,38 @@ class Impresion{
         return valores;
     }
 };
-{ 
-    const obtenerData = async () =>{
 
+{   //carga los registros desde el localstorage si existen. Caso contrario los trae desde la API jsonplaceholder personalizada
+    const obtenerData = async () =>{
         try {
             const origen = await axios.get(`https://my-json-server.typicode.com/msubotich/CursoJSCoderhouse/entradas`);
             console.log("Base de datos de ejemplo cargada");
             origen.data.forEach(objeto => {
                 archivoImpresiones.push(new Impresion(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
-                console.log(objeto);
             });
+            representaArreglo();
         } catch (error) {
             console.log(error);
         }
-    
     }
 
     if (localStorage.getItem('archivoImpresiones') != null){
         let entradas = [];
         entradas = JSON.parse(window.localStorage.getItem('archivoImpresiones'));
-        console.log('hay')
+        console.log('Base de datos local cargada')
         entradas.forEach(objeto => {
             archivoImpresiones.push(new Impresion(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
         });
     }else{
         console.log('no hay')
-        obtenerData();  
+        obtenerData();
+        console.log(archivoImpresiones)
     }   
 } //se confina la variable entradas para que se libere al terminar este proceso y no ocupar memoria.
 
-//genera los objetos en base a los datos que tomó.
-
-document.getElementById('costoxgramo').value = "2.5";
+document.getElementById('costoxgramo').value = "2.5"; //valores por defecto.
 document.getElementById('costoxhora').value = "150";
 //---------------------------------------------------------------------------------------------
-
-// Función que muestra el formulario para agregar inpresiones.
-//parametros: ninguno.
-//afecta: ninguno.
-//retorna: ninguno.
-const mostrarForm = () => {
-    let divForm = document.getElementById('newPrintForm'); //togglea el form de entrada de datos
-    (divForm.style.display === "none")?divForm.style.display = "block":divForm.style.display = "none";
-}
 
 // Función que agrega un nuevo trabajo de impresion a la lista. Luego actualiza la tabla para mostrarlo (indirectamente).
 // Parámetros: ninguno.
@@ -78,32 +67,55 @@ const mostrarForm = () => {
 // Retorna: ninguno.
 const agregar = () => {
     
-    //variables requeridas para crear el objeto.
-    let cliente, modelo, material, pintura= "";
-    let tiempo = 0;
-    let datos = []; //variable para alojar el retorno de la funcion del objeto.   
+    let formulario = document.createElement("div");
+    formulario.innerHTML = `
+            <h5>Complete los datos. Todos son obligatorios<h5>
+            </br>
+            <label for="ClientInput">Cliente</label>
+            <input autocomplete="off" class="form-control d-inline-block" id="ClientInput" style="width: 89%" type="text"/>
 
+            <label for="ModelInput">Modelo</label>
+            <input autocomplete="off" class="form-control d-inline-block" id="ModelInput" style="width: 89%;margin-bottom:2rem;" type="text"/>
 
-    cliente = document.getElementById('ClientInput').value;
-    modelo = document.getElementById('ModelInput').value;
-    material = parseFloat(document.getElementById('MaterialInput').value);
-    pintura = document.getElementById('PaintSelect').value;
-    tiempo = parseFloat(document.getElementById('TimeInput').value);
-    
-    console.log(cliente, material, tiempo,pintura,modelo);
+            <label for="MaterialInput">Material (g)</label>
+            <input autocomplete="off" class="form-control d-inline-block w-25" id="MaterialInput" style="width: 30%;" type="number"/>
 
-    let impresion = new Impresion(generarID(),cliente,modelo,material,pintura,tiempo);
-    datos = impresion.calcularValores();
+            <label for="TimeInput">Tiempo (h)</label>
+            <input autocomplete="off" class="form-control d-inline-block w-25" id="TimeInput" style="width: 30%;" type="number"/>
 
-    archivoImpresiones.push(impresion);
+            <label class="form-label" for="PaintSelect" style="margin-top:2rem;">Pintado</label>
+            <input autocomplete="off" type="checkbox" class="form-check-input" id="PaintSelect">
+          `;
 
-    localStorage.archivoImpresiones = JSON.stringify(archivoImpresiones); //guarda en local storage
-    for (let index = 0; index < 4; index++) {
-        document.getElementById("newPrintForm").getElementsByTagName("input")[index].value = "";
-    } 
+    Swal.fire({
+        title: 'Nuevo trabajo',
+        html: formulario,
+        showCancelButton: true,
+        confirmButtonText: "Guardar",
+        cancelButtonText: "Cancelar",
 
-    mostrarForm();
-    representaArreglo(archivoImpresiones);
+    }).then(resultado => {
+        if (resultado.value) {
+        cliente = document.getElementById('ClientInput').value;
+        modelo = document.getElementById('ModelInput').value;
+        material = parseFloat(document.getElementById('MaterialInput').value);
+        pintura = document.getElementById('PaintSelect').checked;
+        tiempo = parseFloat(document.getElementById('TimeInput').value);
+        
+        if(cliente != "" && modelo != "" && material != "" && tiempo != ""){
+            let impresion = new Impresion(generarID(),cliente,modelo,material,pintura,tiempo);
+            archivoImpresiones.push(impresion);
+            localStorage.archivoImpresiones = JSON.stringify(archivoImpresiones); //guarda en local storage
+            representaArreglo(archivoImpresiones);
+        }else{
+            Swal.fire('Todos los datos son obligatorios');
+            setTimeout(() => {
+                agregar();
+              }, 1000)
+        }
+
+        }
+    });
 };
 
 // Función que elimina un trabajo de impresión de la lista según su ID. Luego actualiza la tabla para mostrarlo (indirectamente).
@@ -111,21 +123,42 @@ const agregar = () => {
 // Afecta: archivoImpresiones.
 // Retorna: ninguno.
   const eliminar = () => {
-    let objetivo = 0;
-    do{
-        objetivo = prompt("Ingrese el índice del registro a eliminar");
-    }while (isNaN(objetivo));
 
-    if(confirm("Está seguro que quiere eliminarlo?")) {
-        if(!(archivoImpresiones.find(elemento => elemento.indice == objetivo)===undefined)){
-            archivoImpresiones.splice(archivoImpresiones.indexOf(archivoImpresiones.find(elemento => elemento.indice == objetivo)),1);
-            localStorage.archivoImpresiones = JSON.stringify(archivoImpresiones); //guarda en local storage
-            representaArreglo(archivoImpresiones);
-            alert("Regsitro eliminado");
-        }else{
-            alert("El registro no existe");
-        }
-    }
+    Swal
+    .fire({
+        title: "Eliminación de registros",
+        text: "Ingrese el ID del registro a eliminar",
+        input: "number",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            Swal.fire({
+                title: '¿Está seguro que quiere eliminarlo?',
+                text: "Esta acción es IRREVERSIBLE",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar'
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    if(!(archivoImpresiones.find(elemento => elemento.id == resultado.value)===undefined)){
+                        archivoImpresiones.splice(archivoImpresiones.indexOf(archivoImpresiones.find(elemento => elemento.id == resultado.value)),1);
+                        localStorage.archivoImpresiones = JSON.stringify(archivoImpresiones); //guarda en local storage
+                        representaArreglo(archivoImpresiones);
+                        Swal.fire('Registro eliminado');
+                    }else{
+                        Swal.fire('El registro no existe');
+                    }
+                    
+                }
+            })
+            }
+    }); 
 };
 
 // Función que busca un registro según el contenido del cuadro de búsqueda. Muestra el arreglo resultante (indirectamente).
@@ -144,11 +177,9 @@ const agregar = () => {
 // Retorna: ninguno.
 const representaArreglo = (arreglo=archivoImpresiones) => {
     let datos = [];
-    console.log("arreglo",arreglo);
     limpiarCuerpo();
     arreglo.forEach(objeto => {
         datos = objeto.calcularValores();
-        console.log(objeto,"que onda");
         mostrarEnTabla(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo,datos);
     });
 };
@@ -174,7 +205,7 @@ const mostrarEnTabla = (indice,cliente,modelo,material,pintura,tiempo,valores) =
 // Retorna: indice numérico.
 const generarID = () =>{
     let nuevoIndice = 1;
-    if(archivoImpresiones.length > 0) nuevoIndice = archivoImpresiones[archivoImpresiones.length - 1].indice + 1;
+    if(archivoImpresiones.length > 0) nuevoIndice = archivoImpresiones[archivoImpresiones.length - 1].id + 1;
     return nuevoIndice;
 };
 
@@ -201,5 +232,4 @@ const limpiarCuerpo = () => {
         </tbody>`
 };
 
-//llena la tabla al inicio, por defecto.
 representaArreglo();

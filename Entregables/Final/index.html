@@ -9,36 +9,12 @@
     <title>Entrega Final</title>
 </head>
 <body class="container">
-    <h2 class="text-center">Gestión de piezas impresas 3D</h2>
+    <h2 class="text-center">Gestión de trabajos de impresión 3D</h2>
     <p class="text-right">Alumno: Martín Subotich</p>
     <div class="row" style="margin-bottom: 1rem">
-        <button type="button" class="btn btn-outline-primary w-25" onclick="mostrarForm()">Agregar Impresion</button>
+        <button type="button" class="btn btn-outline-primary w-25" onclick="agregar()">Agregar Impresion</button>
         <button type="button" class="btn btn-outline-primary w-25" onclick="eliminar()">Eliminar Impresion</button>
-        <input id="buscareg" class=" w-50 text-end" type="search" placeholder="Buscar" onchange="buscar()"/>
-    </div>
-    <div id="newPrintForm" class="row border border-dark mt-3 mb-3" style="display: none;">
-        <h5 style="display: inline-block">Complete los datos</h5>
-        
-        <form  class="form-horizontal text-center" onsubmit="return false">
-
-            <label class="form-label d-inline-block text-center" style="width: 10%" for="ClientInput">Cliente</label>
-            <input autocomplete="off" class="form-control d-inline-block" id="ClientInput" style="width: 89%" type="text"/>
-
-            <label class="form-label d-inline-block text-center" style="width: 10%" for="ModelInput">Modelo</label>
-            <input autocomplete="off" class="form-control d-inline-block" id="ModelInput" style="width: 89%" type="text"/>
-
-            <label class="form-label d-inline-block text-center" for="MaterialInput" style="width: 10%" >Material (g)</label>
-            <input autocomplete="off" class="form-control d-inline-block w-25" id="MaterialInput" style="width: 30%;" type="number"/>
-
-            <label class="form-label d-inline-block text-center" for="TimeInput" style="width: 10%" >Tiempo (h)</label>
-            <input autocomplete="off" class="form-control d-inline-block w-25" id="TimeInput" style="width: 30%;" type="number"/>
-
-            <label class="form-label" for="PaintSelect">Pintado</label>
-            <input autocomplete="off" type="checkbox" class="form-check-input" id="PaintSelect">
-          
-            <button type="submit" id="okButton" onclick="agregar()" class="btn btn-outline-primary form-control w-25 mt-2 mb-2">Confirmar</button>
-            <button type="reset" class="btn btn-outline-primary form-control w-25 mt-2 mb-2">Borrar</button>
-        </form>
+        <input id="buscareg" class=" w-50 text-end" type="search" placeholder="Buscar" onkeyup="buscar()"/>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-12 border border-dark" style="overflow: scroll; max-height: 60vh;">
@@ -69,6 +45,7 @@
         <input class="col-xs-12 col-md-4" id="costoxhora" type="text"/>
     </div>
   
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
