@@ -51,9 +51,8 @@ class Impresion{
             archivoImpresiones.push(new Impresion(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
         });
     }else{
-        console.log('no hay')
+        console.log('Base de datos remota cargada')
         obtenerData();
-        console.log(archivoImpresiones)
     }   
 } //se confina la variable entradas para que se libere al terminar este proceso y no ocupar memoria.
 
