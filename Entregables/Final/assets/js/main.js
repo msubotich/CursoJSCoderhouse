@@ -1,22 +1,9 @@
 let archivoImpresiones = [];
 
-const obtenerData = async () =>{
-
-    try {
-        const origen = await axios(`https://my-json-server.typicode.com/msubotich/CursoJSCoderhouse/entradas`);
-        console.log("Base de datos de ejemplo cargada");
-        console.log(origen.data);
-        return origen.data;
-    } catch (error) {
-        console.log(error);
-    }
-
-}
-
 class Impresion{
     //propiedades
-    constructor(indice,cliente,modelo,material,pintado,tiempo){
-        this.indice = indice;
+    constructor(id,cliente,modelo,material,pintado,tiempo){
+        this.id = id;
         this.cliente = cliente;
         this.modelo = modelo;
         this.material = material;
@@ -42,20 +29,31 @@ class Impresion{
     }
 };
 { 
-    let entradas = [];
+    const obtenerData = async () =>{
+
+        try {
+            const origen = await axios.get(`https://my-json-server.typicode.com/msubotich/CursoJSCoderhouse/entradas`);
+            console.log("Base de datos de ejemplo cargada");
+            origen.data.forEach(objeto => {
+                archivoImpresiones.push(new Impresion(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
+                console.log(objeto);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    
+    }
+
     if (localStorage.getItem('archivoImpresiones') != null){
+        let entradas = [];
         entradas = JSON.parse(window.localStorage.getItem('archivoImpresiones'));
         console.log('hay')
         entradas.forEach(objeto => {
-            archivoImpresiones.push(new Impresion(objeto.indice,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
+            archivoImpresiones.push(new Impresion(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
         });
     }else{
         console.log('no hay')
-        entradas=obtenerData();
-        console.log("salida de promesa",entradas);
-        //entradas.forEach(objeto => {
-        //    archivoImpresiones.push(new Impresion(objeto.indice,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo));
-        //});
+        obtenerData();  
     }   
 } //se confina la variable entradas para que se libere al terminar este proceso y no ocupar memoria.
 
@@ -137,7 +135,7 @@ const agregar = () => {
   const buscar = () => {
     let objetivo =  document.getElementById('buscareg').value
     objetivo = objetivo.toUpperCase();
-    representaArreglo(archivoImpresiones.filter(elemento => elemento.indice == objetivo || elemento.cliente.toUpperCase().includes(objetivo)|| elemento.modelo.toUpperCase().includes(objetivo)));
+    representaArreglo(archivoImpresiones.filter(elemento => elemento.id == objetivo || elemento.cliente.toUpperCase().includes(objetivo)|| elemento.modelo.toUpperCase().includes(objetivo)));
 };
 
 // Función que borra la tabla, luego muestra el arreglo parámetro en ella (indirectamente).
@@ -146,10 +144,12 @@ const agregar = () => {
 // Retorna: ninguno.
 const representaArreglo = (arreglo=archivoImpresiones) => {
     let datos = [];
+    console.log("arreglo",arreglo);
     limpiarCuerpo();
     arreglo.forEach(objeto => {
         datos = objeto.calcularValores();
-        mostrarEnTabla(objeto.indice,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo,datos);
+        console.log(objeto,"que onda");
+        mostrarEnTabla(objeto.id,objeto.cliente,objeto.modelo,objeto.material,objeto.pintado,objeto.tiempo,datos);
     });
 };
 
